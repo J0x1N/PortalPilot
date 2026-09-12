@@ -45,9 +45,10 @@ export function createApp(runManager = new RunManager()): express.Express {
 
   app.get("/api/demo-data", async (_request, response) => {
     try {
-      const filePath = path.resolve(process.cwd(), "examples", "customers.xlsx");
+      const fileName = "customers-with-error.xlsx";
+      const filePath = path.resolve(process.cwd(), "examples", fileName);
       const buffer = await readFile(filePath);
-      response.json(parseWorkbook(buffer, "customers.xlsx"));
+      response.json(parseWorkbook(buffer, fileName));
     } catch (error) {
       const message = error instanceof Error ? error.message : "Demo data is unavailable";
       response.status(500).json({ error: message });

@@ -1,6 +1,34 @@
-# PortalPilot v0.1
+# PortalPilot
+
+> Turn repetitive Excel → browser → Excel workflows into reliable automations.
+
+```text
+Input:
+customer IDs in Excel
+
+PortalPilot:
+opens portal
+fills form
+extracts balance/status
+handles errors
+
+Output:
+result.xlsx
+```
 
 PortalPilot is a local workflow runner for repetitive CSV/XLSX work in browser portals. It uses React and Vite for the interface, Express for the local server, Playwright for a visible Chromium browser, and `xlsx` for file parsing and export.
+
+## Features
+
+- Excel/CSV input
+- Browser automation with Playwright
+- Persistent login sessions
+- Error recovery
+- Failure screenshots
+- Resume interrupted runs
+- Excel export
+- Runs locally
+- No customer data sent to cloud
 
 No data leaves the computer. PortalPilot does not use a cloud service, external API, authentication system, database, AI API, Docker, Electron, or Chrome extension.
 
@@ -22,13 +50,21 @@ The Express server runs at <http://localhost:3001>. The local demo portal is ava
 
 1. Start PortalPilot with `npm run dev`.
 2. Open <http://localhost:5173>.
-3. Click **Load the 10-row demo dataset**. This loads `examples/customers.xlsx`.
+3. Click **Load customers-with-error.xlsx**. This loads the 11-row demo dataset with ten valid customer IDs and one nonexistent ID.
 4. The demo workflow is already in the editor. It opens `/demo-target`, fills `#customer-id`, clicks `#search-button`, waits for `#result`, and extracts `#balance` and `#status`.
 5. Click **Run workflow**.
-6. Chromium opens visibly. The run processes the ten rows one at a time and updates the row log live.
+6. Chromium opens visibly. The run processes the eleven rows one at a time and updates the row log live. The expected result is **10 successful** and **1 failed**; the failed row gets an error and screenshot while processing continues.
 7. Download `result.xlsx` when the run completes.
 
-The same recipe is stored in `examples/workflow.json`. The demo portal contains ten fictional customers with IDs `CUST-001` through `CUST-010`.
+For a clean run without an intentional failure, upload `examples/customers-success.xlsx` instead. The same recipe is stored in `examples/workflow.json`. The demo portal contains ten fictional customers with IDs `CUST-001` through `CUST-010`; `CUST-999` is the intentional failure case.
+
+## Real-world uses
+
+- Updating internal web portals from Excel
+- Looking up product/customer IDs
+- Extracting prices/statuses from supplier portals
+- Repetitive back-office data entry
+- Moving data between legacy systems without APIs
 
 ## Project layout
 
@@ -54,7 +90,8 @@ src/
   types/
     index.ts          # Zod schemas and shared types
 examples/
-  customers.xlsx
+  customers-success.xlsx
+  customers-with-error.xlsx
   workflow.json
 runs/
   {runId}/

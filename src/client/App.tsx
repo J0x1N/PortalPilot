@@ -194,6 +194,7 @@ export function App() {
 
   const processed = (run?.successful ?? 0) + (run?.failed ?? 0);
   const isRunning = Boolean(run && !isTerminalRun(run.status));
+  const capturedFailures = run?.rows.filter((row) => row.status === "failed" && row.screenshot).length ?? 0;
 
   return (
     <div className="app-shell">
@@ -203,15 +204,15 @@ export function App() {
           <span>PortalPilot</span>
           <small>v0.1</small>
         </a>
-        <div className="topbar-note"><span className="live-dot" /> Local workspace</div>
+        <div className="topbar-note"><span className="live-dot" /> Demo mode / local workspace</div>
       </header>
 
       <main className="workspace">
         <section className="intro-row">
           <div>
             <p className="kicker">Workflow studio</p>
-            <h1>Move portal work forward.</h1>
-            <p className="intro-copy">Bring in a spreadsheet, compose the browser steps, and keep the result on this machine.</p>
+            <h1>PortalPilot</h1>
+            <p className="intro-copy">Automate repetitive browser work from spreadsheets.</p>
           </div>
           <div className="intro-stat">
             <span>Browser context</span>
@@ -243,14 +244,14 @@ export function App() {
               <span className="upload-glyph">↑</span>
               <div>
                 <strong>{parsedFile ? parsedFile.fileName : "Drop a spreadsheet here"}</strong>
-                <p>{parsedFile ? `${parsedFile.rows.length} rows ready to run` : "CSV or XLSX, up to 15 MB"}</p>
+                <p>{parsedFile ? `${parsedFile.rows.length} rows loaded` : "CSV or XLSX, up to 15 MB"}</p>
               </div>
               <button className="button button-secondary" type="button" onClick={() => fileInputRef.current?.click()} disabled={busy}>
                 <span>↑</span> {busy ? "Reading..." : "Upload file"}
               </button>
             </div>
             <button className="text-button" type="button" onClick={loadDemoData} disabled={loadingDemo || busy}>
-              {loadingDemo ? "Loading demo..." : "Load the 10-row demo dataset"}
+              {loadingDemo ? "Loading customers-with-error.xlsx..." : "Load customers-with-error.xlsx"}
             </button>
 
             {parsedFile && (
@@ -377,6 +378,7 @@ export function App() {
               {run.status === "completed" && (
                 <div className="result-banner">
                   <div><strong>{run.successful} successful</strong><span>{run.failed} failed</span></div>
+                  {capturedFailures > 0 && <small className="capture-note">{capturedFailures} failure screenshot captured</small>}
                   <a className="button button-primary" href={`/api/runs/${run.id}/result`}><span>↓</span> Download result.xlsx</a>
                 </div>
               )}

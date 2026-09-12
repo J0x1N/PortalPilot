@@ -1,6 +1,37 @@
 node_modules/
 dist/
+
+# Local browser profiles and authentication/session state
 .portalpilot/
-runs/*
+**/browser-profile/
+**/session/
+**/sessions/
+**/cookie/
+**/cookies/
+storage-state*.json
+auth-state*.json
+
+# Real runs, screenshots, and test reports
+runs/**
 !runs/.gitkeep
+screenshots/
+**/screenshots/
+runs/**/errors/
+test-results/
+playwright-report/
+
+# Temporary files and local environment secrets
+tmp/
+temp/
+.tmp/
+.temp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.env
+.env.*
+!.env.example
+
 *.log

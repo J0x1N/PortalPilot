@@ -47,6 +47,7 @@ h1 { max-width: 720px; margin-bottom: 14px; color: var(--pine); font-family: Geo
 .section-heading { display: flex; justify-content: space-between; align-items: start; gap: 20px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
 h2 { margin-bottom: 0; color: var(--pine); font-family: Georgia, serif; font-size: 33px; font-weight: 400; letter-spacing: -.04em; }
 .file-kind, .step-count, .row-count { color: var(--muted); font: 500 10px 'Courier New', monospace; letter-spacing: .06em; text-transform: uppercase; }
+.step-count { text-transform: none; }
 .file-kind { padding-top: 5px; }
 .upload-zone { display: flex; align-items: center; gap: 14px; margin: 25px 0 13px; padding: 18px; border: 1px dashed #aebfb1; background: #f3f6f0; }
 .upload-glyph { display: grid; flex: 0 0 auto; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: var(--pine); color: white; font-size: 20px; }
@@ -119,6 +120,7 @@ input:focus, select:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rg
 .result-banner div { display: flex; gap: 14px; align-items: baseline; }
 .result-banner strong { color: var(--pine); font-family: Georgia, serif; font-size: 21px; font-weight: 400; }
 .result-banner span { color: var(--coral); font: 500 11px 'Courier New', monospace; }
+.capture-note { color: var(--muted); font: 500 11px 'Courier New', monospace; }
 .run-error { margin: 14px 0 0; color: #a14d36; font-size: 12px; }
 .empty-run { display: flex; align-items: center; gap: 15px; min-height: 110px; padding: 24px 0 6px; color: var(--muted); }
 .empty-run > span { color: var(--coral); font-size: 31px; }

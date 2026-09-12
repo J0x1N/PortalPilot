@@ -10,9 +10,9 @@ import type { RunInput } from "../src/types";
 import { closeServer, listen, waitForRun } from "./helpers";
 
 describe("demo target end-to-end", () => {
-  it("processes all ten example customers and extracts balance and status", async () => {
-    const examplePath = path.resolve(process.cwd(), "examples", "customers.xlsx");
-    const example = parseWorkbook(await readFile(examplePath), "customers.xlsx");
+  it("processes all ten successful example customers and extracts balance and status", async () => {
+    const examplePath = path.resolve(process.cwd(), "examples", "customers-success.xlsx");
+    const example = parseWorkbook(await readFile(examplePath), "customers-success.xlsx");
     expect(example.rows).toHaveLength(10);
     expect(example.columns).toEqual(["customer_id"]);
 
