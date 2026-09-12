@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "outDir": "dist/server",
+    "rootDir": "src",
+    "types": ["node"],
+    "sourceMap": true
+  },
+  "include": ["src/automation", "src/files", "src/server", "src/types"]
+}

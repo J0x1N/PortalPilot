@@ -1,0 +1,32 @@
+{
+  "steps": [
+    {
+      "type": "OPEN",
+      "url": "http://localhost:3001/demo-target"
+    },
+    {
+      "type": "FILL",
+      "selector": "#customer-id",
+      "value": "{{customer_id}}"
+    },
+    {
+      "type": "CLICK",
+      "selector": "#search-button"
+    },
+    {
+      "type": "WAIT",
+      "selector": "#result",
+      "timeout": 10000
+    },
+    {
+      "type": "EXTRACT",
+      "selector": "#balance",
+      "column": "balance"
+    },
+    {
+      "type": "EXTRACT",
+      "selector": "#status",
+      "column": "status"
+    }
+  ]
+}
