@@ -75,7 +75,9 @@ export async function runWorkflow(input: RunInput, options: RunnerOptions): Prom
   try {
     await mkdir(options.browserProfileDir, { recursive: true });
     context = await chromium.launchPersistentContext(options.browserProfileDir, {
-      headless: options.headless ?? false
+      headless: options.headless ?? false,
+      args: ["--start-maximized"],
+      viewport: null
     });
     const page = context.pages()[0] ?? (await context.newPage());
 

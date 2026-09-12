@@ -56,6 +56,16 @@ The Express server runs at <http://localhost:3001>. The local demo portal is ava
 6. Chromium opens visibly. The run processes the eleven rows one at a time and updates the row log live. The expected result is **10 successful** and **1 failed**; the failed row gets an error and screenshot while processing continues.
 7. Download `result.xlsx` when the run completes.
 
+### Screen recording demo
+
+For a guided 40–50 second screen recording, start PortalPilot with `npm run dev`, begin your screen capture, and run:
+
+```bash
+npm run demo:record
+```
+
+The recording walkthrough opens a spreadsheet-style view with all 11 IDs, loads the dataset in PortalPilot, pauses on the six-step workflow, runs the visible Chromium automation, opens the captured failure screenshot, downloads `result.xlsx`, and shows its balance, status, and row states. It closes the browser after the final title card has been visible for a few seconds.
+
 For a clean run without an intentional failure, upload `examples/customers-success.xlsx` instead. The same recipe is stored in `examples/workflow.json`. The demo portal contains ten fictional customers with IDs `CUST-001` through `CUST-010`; `CUST-999` is the intentional failure case.
 
 ## Real-world uses

@@ -71,27 +71,36 @@ export const demoTargetHtml = `<!doctype html>
 
     const form = document.querySelector('#lookup-form');
     const result = document.querySelector('#result');
+    const recordingMode = new URLSearchParams(window.location.search).get('recording') === '1';
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const customer = customers[document.querySelector('#customer-id').value.trim().toUpperCase()];
-      result.replaceChildren();
-      result.hidden = false;
-      if (!customer) {
-        const notice = document.createElement('p');
-        notice.className = 'notice';
-        notice.textContent = 'No customer record found.';
-        result.append(notice);
-        return;
-      }
+      const renderResult = () => {
+        result.replaceChildren();
+        result.hidden = false;
+        if (!customer) {
+          const notice = document.createElement('p');
+          notice.className = 'notice';
+          notice.textContent = 'No customer record found.';
+          result.append(notice);
+          return;
+        }
 
-      const heading = document.createElement('h2');
-      heading.id = 'customer-name';
-      heading.textContent = customer.name;
-      const details = document.createElement('dl');
-      details.innerHTML = '<div><dt>Balance</dt><dd id="balance"></dd></div><div><dt>Status</dt><dd id="status"></dd></div>';
-      result.append(heading, details);
-      document.querySelector('#balance').textContent = customer.balance;
-      document.querySelector('#status').textContent = customer.status;
+        const heading = document.createElement('h2');
+        heading.id = 'customer-name';
+        heading.textContent = customer.name;
+        const details = document.createElement('dl');
+        details.innerHTML = '<div><dt>Balance</dt><dd id="balance"></dd></div><div><dt>Status</dt><dd id="status"></dd></div>';
+        result.append(heading, details);
+        document.querySelector('#balance').textContent = customer.balance;
+        document.querySelector('#status').textContent = customer.status;
+      };
+
+      if (recordingMode) {
+        window.setTimeout(renderResult, 650);
+      } else {
+        renderResult();
+      }
     });
   </script>
 </body>

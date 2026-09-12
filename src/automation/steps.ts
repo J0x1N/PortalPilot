@@ -41,7 +41,7 @@ export async function executeStep(step: WorkflowStep, context: StepContext): Pro
       await context.page.locator(step.selector).waitFor({ state: "visible", timeout: step.timeout });
       return;
     case "EXTRACT": {
-      const value = await context.page.locator(step.selector).innerText();
+      const value = await context.page.locator(step.selector).innerText({ timeout: 5000 });
       context.extracted[step.column] = value.trim();
       return;
     }
